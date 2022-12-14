@@ -1,0 +1,12 @@
+@import "../../GlobalStyles/global";
+
+.modalContent {
+  @include modalContent;
+  @include centerContainerV;
+  justify-content: space-around;
+}
+
+h2 {
+  text-align: center;
+  color: $primaryColor;
+}

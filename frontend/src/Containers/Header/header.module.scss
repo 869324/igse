@@ -1,0 +1,10 @@
+@import "../../GlobalStyles/global";
+
+.navBar {
+  height: 7vh;
+  width: 100vw;
+  @include centerContainerH;
+  justify-content: space-between;
+  background-color: $primaryColor;
+  color: white;
+}
