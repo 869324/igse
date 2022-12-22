@@ -24,18 +24,7 @@ public class UserService {
     @Autowired
     private UserRepo userRepo;
 
-    public Object login(LoginRequest loginRequest) {
-        try {
-            authManager.authenticate(loginRequest);
-            String token = jwtUtil.generateToken(loginRequest.getUsername());
-            User user = userRepo.findByEmail(loginRequest.getUsername());
-            return  Map.of("token", token, "user", user);
-        }catch (Exception ex) {
-            throw new AppException(ex.getMessage());
-        }
 
-
-    };
 
     public User signup(User user) throws Exception {
         try {

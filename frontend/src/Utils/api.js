@@ -1,28 +1,16 @@
 import axios from "axios";
 import { BASE_API_PATH } from "../Config/config";
 
-// const function call(url, params) {
-//   axios(`${BASE_API_PATH}${url}`, {
-//     ...params,
-//   })
-//     .then((response) => {
-//       return response;
-//     })
-//     .catch((error) => {
-//       return error;
-//     });
-// }
-
-const call = (url, params) =>
+const call = (request) =>
   new Promise((resolve, reject) => {
+    request.url = `${BASE_API_PATH}${request.url}`;
     const accessToken = localStorage.getItem("accessToken");
-    axios(`${BASE_API_PATH}${url}`, {
-      ...params,
-      headers: {
-        ...params.headers,
-        Authorization: `Bearer ${accessToken}`,
-      },
-    })
+
+    if (accessToken) {
+      request.headers = { Authorization: `Bearer ${accessToken}` };
+    }
+
+    axios(request)
       .then((response) => {
         resolve(response);
       })

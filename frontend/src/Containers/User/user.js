@@ -10,15 +10,20 @@ function User(props) {
   const dispatch = useDispatch();
 
   const tokenState = useSelector((state) => state.user.verifyToken);
+  const { token } = useSelector((state) => state.user.login);
 
   useEffect(() => {
+    const { isValid, loading } = tokenState;
     const accessToken = localStorage.getItem("accessToken");
+
     if (!accessToken) {
       navigate("/login");
-    } else if (!tokenState.isValid) {
-      dispatch(verifyToken);
+    } else if (!isValid && !loading) {
+      dispatch(verifyToken(accessToken));
     }
   }, [tokenState]);
+
+  useEffect(() => {}, [token]);
 
   return (
     <main

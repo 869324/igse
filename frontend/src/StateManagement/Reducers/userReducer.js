@@ -13,7 +13,7 @@ const universalState = {
 const initialState = {
   getUsers: { ...universalState, users: [] },
   createUser: { ...universalState },
-  login: { ...universalState, user: null, token: null },
+  login: { ...universalState, token: null },
   deleteUser: { ...universalState },
   updateUser: { ...universalState },
   resetPassword: { ...universalState },
@@ -107,11 +107,10 @@ const userSlice = createSlice({
 export const login = (user) => async (dispatch) => {
   dispatch(userSlice.actions.login({ loading: true, tried: true }));
 
-  call(`/users/login`, { method: "POST", body: { ...user } })
+  call({ url: `/auth/login`, data: user, method: "POST" })
     .then((response) => {
       dispatch(
         userSlice.actions.login({
-          user: response.data.user,
           accessToken: response.data.token,
         })
       );
@@ -122,20 +121,43 @@ export const login = (user) => async (dispatch) => {
     });
 };
 
-export const verifyToken = (accessToken) => async (dispatch) => {
+export const verifyToken = (token) => async (dispatch) => {
   dispatch(userSlice.actions.verifyToken({ loading: true, tried: true }));
 
-  call(`/users/verifyToken`, { method: "POST", body: { accessToken } })
+  call({
+    url: `/auth/verifyToken`,
+    data: token,
+    method: "POST",
+  })
     .then((response) => {
-      dispatch(
-        userSlice.actions.verifyToken({
-          isValid: true,
-        })
-      );
-      success(dispatch, userSlice.actions.verifyToken);
+      console.log(response);
+      if (response.data) {
+        dispatch(
+          userSlice.actions.verifyToken({
+            isValid: true,
+          })
+        );
+        success(dispatch, userSlice.actions.verifyToken);
+      } else {
+        localStorage.removeItem("accessToken");
+        dispatch(
+          userSlice.actions.verifyToken({
+            isValid: false,
+            tried: true,
+            loading: false,
+            status: false,
+            error: null,
+          })
+        );
+      }
     })
     .catch((error) => {
       localStorage.removeItem("accessToken");
+      dispatch(
+        userSlice.actions.verifyToken({
+          isValid: false,
+        })
+      );
       fail(dispatch, userSlice.actions.verifyToken, error);
     });
 };
