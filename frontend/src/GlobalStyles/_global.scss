@@ -11,7 +11,7 @@ $textColor: rgba(250, 250, 250, 0.8);
 }
 
 @mixin overlay() {
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgba(0, 0, 0, 0.7);
   width: 100%;
   height: 100%;
 }
@@ -38,13 +38,14 @@ $textColor: rgba(250, 250, 250, 0.8);
 }
 
 @mixin input($bg: transparent, $color: black) {
-  border: 2px solid $primaryColor;
+  border: none;
   background-color: $bg;
   color: $color;
   font-size: 17px;
   font-weight: 500;
   padding: 10px;
   border-radius: 7px;
+  outline: 2px solid $primaryColor;
 }
 
 @mixin button() {
@@ -53,7 +54,7 @@ $textColor: rgba(250, 250, 250, 0.8);
   font-size: 17px;
   border: none;
   background-color: $primaryColor;
-  border-radius: 30px;
+  border-radius: 15px;
   color: whitesmoke;
 }
 

@@ -1,0 +1,39 @@
+@import "../../GlobalStyles/global";
+
+.main {
+  width: 100vw;
+  height: 100vh;
+  background-position: center;
+  background-size: cover;
+}
+
+.overlay {
+  @include overlay;
+  @include centerContainerH;
+}
+
+.form {
+  min-width: 60%;
+  min-height: 40%;
+  @include centerContainerV;
+  justify-content: space-around;
+  background-color: rgb(220, 220, 220);
+  border-radius: 10px;
+}
+
+.span {
+  font-size: 17px;
+}
+
+.label {
+  margin-right: 7px;
+  font-weight: bold;
+}
+
+.input {
+  @include input;
+}
+
+.login {
+  @include button;
+}
