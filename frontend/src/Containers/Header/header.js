@@ -19,7 +19,7 @@ function Header(props) {
   return (
     <div className={styles.main}>
       <div className={styles.accDiv}>
-        <label className={styles.username}>{user.firstname}</label>
+        <label className={styles.username}>{"Guest"}</label>
         <div
           className={styles.menuDiv}
           onMouseEnter={() => setShowMenu(true)}
