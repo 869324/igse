@@ -25,9 +25,7 @@ public class AuthService {
         try {
             authManager.authenticate(loginRequest);
             String token = jwtUtil.generateToken(loginRequest.getUsername());
-            User user = userRepo.findByEmail(loginRequest.getUsername());
-            user.setPassword(null);
-            return  Map.of("token", token, "user", user);
+            return  Map.of("token", token);
         }catch (Exception ex) {
             throw new AppException(ex.getMessage());
         }

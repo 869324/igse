@@ -1,13 +1,10 @@
 package com.igse.backend.user;
 
 import com.igse.backend.Auth.AuthManager;
-import com.igse.backend.ErrorHandling.AppException;
 import com.igse.backend.Utils.JwtUtil;
+import com.igse.backend.Voucher.Voucher;
+import com.igse.backend.Voucher.VoucherService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.InternalAuthenticationServiceException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +20,8 @@ public class UserService {
     private AuthManager authManager;
     @Autowired
     private UserRepo userRepo;
+    @Autowired
+    VoucherService voucherService;
 
 
 
@@ -35,6 +34,14 @@ public class UserService {
         } catch (Exception ex) {
             throw ex;
         }
+    }
+
+    public User getUserData(String token) {
+        User user = userRepo.findByEmail(jwtUtil.extractUsername(token));
+        user.setPassword(null);
+        Voucher voucher = voucherService.getByUserId(user.getId());
+        user.setVoucherId(voucher.getId());
+        return user;
     }
 
 }

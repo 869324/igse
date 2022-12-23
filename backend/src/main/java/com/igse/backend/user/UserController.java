@@ -18,4 +18,9 @@ public class UserController {
     public Object signup(@RequestBody User user) throws Exception {
         return userService.signup(user);
     }
+
+    @PostMapping(value = "/data")
+    public Object getUserData(@RequestBody String token) throws Exception {
+        return userService.getUserData(token);
+    }
 }

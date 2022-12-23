@@ -1,0 +1,33 @@
+@import "../../../GlobalStyles/global";
+
+.main {
+  @include modalContent;
+  @include centerContainerV;
+  justify-content: start;
+}
+
+.classData {
+  width: 90%;
+  margin-top: 30px;
+  @include centerContainerH;
+  justify-content: space-between;
+  font-size: 17px;
+  font-weight: 500;
+
+  .label {
+    color: $primaryColor;
+  }
+
+  .value {
+    margin-left: 10px;
+    color: black;
+  }
+}
+
+#close {
+  @include modalClose;
+}
+
+#close:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}

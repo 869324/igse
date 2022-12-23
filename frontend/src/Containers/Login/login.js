@@ -9,17 +9,18 @@ function Login(props) {
   const [formData, setFormData] = useState({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const loginState = useSelector((state) => state.user.login);
 
   useEffect(() => {
-    const { tried, status, error, accessToken, user } = loginState;
-    if (status && user && accessToken) {
-      localStorage.setItem("accessToken", accessToken);
+    const { tried, status, error, token } = loginState;
+    if (status && token) {
+      localStorage.setItem("accessToken", token);
 
-      if (user.role == "USER") {
-        navigate("/user");
-      } else {
+      if (formData.username == "gse@shangrila.gov.un") {
         navigate("/admin");
+      } else {
+        navigate("/user");
       }
     } else if (tried) {
       dispatch(showModal({ status: true, action: "error" }));
@@ -67,7 +68,11 @@ function Login(props) {
           </span>
 
           <button onClick={login} className={styles.login}>
-            {loginState.loading ? "Login" : "Loading ..."}
+            {loginState.loading ? "Loading..." : "Login"}
+          </button>
+
+          <button onClick={navigate("/signup")} className={styles.signup}>
+            Create Account
           </button>
         </form>
       </div>
