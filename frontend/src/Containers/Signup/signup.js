@@ -6,9 +6,10 @@ import { showModal } from "../../StateManagement/Reducers/modalReducer";
 import { signup } from "../../StateManagement/Reducers/userReducer";
 import { PROPERTY_TYPES } from "../../Constants/constants";
 import Scanner from "../Scanner/scanner";
+import { showAlert } from "../../StateManagement/Reducers/alertReducer";
 
 function Signup(props) {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({ role: "USER" });
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -16,11 +17,9 @@ function Signup(props) {
   const [scan, setScan] = useState(false);
 
   useEffect(() => {
-    const { tried, status, error, loading } = signupState;
+    const { status } = signupState;
     if (status) {
       navigate("/login");
-    } else if (tried && !loading) {
-      dispatch(showModal({ status: true, action: "error" }));
     }
   }, [signupState]);
 
@@ -38,7 +37,14 @@ function Signup(props) {
 
   const submit = (e) => {
     e.preventDefault();
-    dispatch(signup(formData));
+
+    if (!formData.propertyType) {
+      dispatch(showAlert("Choose valid property type!"));
+    } else if (formData.password !== formData.confirmPassword) {
+      dispatch(showAlert("Your passwords do not match!"));
+    } else {
+      dispatch(signup(formData));
+    }
   };
 
   return (
@@ -50,6 +56,7 @@ function Signup(props) {
 
       <div className={styles.overlay}>
         <form className={styles.form} onSubmit={submit}>
+          <h2 className={styles.h2}>Signup</h2>
           <span className={styles.span}>
             <input
               className={styles.input}
@@ -71,7 +78,6 @@ function Signup(props) {
           </span>
 
           <span className={styles.span}>
-            <label>PropertyType</label>
             <select
               className={styles.input}
               onChange={handleChange}
@@ -79,6 +85,7 @@ function Signup(props) {
               required
               placeholder="Property Type"
             >
+              <option value={null}>PropertyType</option>;
               {Object.entries(PROPERTY_TYPES).map((entry) => {
                 return <option value={entry[0]}>{entry[1]}</option>;
               })}
@@ -89,7 +96,17 @@ function Signup(props) {
             <input
               className={styles.input}
               onChange={handleChange}
-              name="password"
+              name="numOfBedrooms"
+              required
+              placeholder="Num of Bedrooms"
+            />
+          </span>
+
+          <span className={styles.span}>
+            <input
+              className={styles.input}
+              onChange={handleChange}
+              name="voucher"
               required
               placeholder="Voucher"
             ></input>

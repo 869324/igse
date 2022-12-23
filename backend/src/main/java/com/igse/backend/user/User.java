@@ -18,5 +18,5 @@ public class User {
     private int numOfBedrooms;
     private PropertyType propertyType;
     private UserRole role;
-    private int voucherId;
+    private String voucher;
 }

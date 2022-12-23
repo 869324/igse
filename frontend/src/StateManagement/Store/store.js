@@ -1,10 +1,12 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userReducer from "../Reducers/userReducer";
 import modalReducer from "../Reducers/modalReducer";
+import alertReducer from "../Reducers/alertReducer";
 
 const appReducer = combineReducers({
   user: userReducer,
   modal: modalReducer,
+  alert: alertReducer,
 });
 
 const rootReducer = (state, action) => {

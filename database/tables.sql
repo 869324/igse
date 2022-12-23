@@ -7,7 +7,6 @@ create table users (
 	email Varchar(255) not null unique,
 	address varchar(255),
 	numOfBedrooms int,
-	voucherId varchar(255),
 	propertyType enum('DETACHED', 'SEMI_DETACHED', 'TERRACED', 'FLAT', 'COTTAGE', 'BUNGALOW', 'MANSION'),
 	role enum('ADMIN', 'USER') not null,
 	password varchar(255) not null
@@ -20,9 +19,9 @@ insert into users (email, password, role) values ('gse@shangrila.gov.un', '$2a$1
 create table vouchers (
 	id int primary key auto_increment,
 	code Varchar(255) not null unique,
-	userId int,
+	userId int default 0,
 	credit float not null,
-	foreign key (userId) references users(id)
+	foreign key (userId) references users(id) on delete set null
 );
 
 insert into vouchers (code, credit)
