@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { success, fail } from "../../Utils/actions";
 import call from "../../Utils/api";
+import { showAlert } from "./alertReducer";
 
 const universalState = {
   tried: false,
@@ -210,10 +211,13 @@ export const signup = (user) => async (dispatch) => {
 
   call({ url: `/users/signup`, data: user, method: "POST" })
     .then((response) => {
-      success(dispatch, userSlice.actions.getUserData);
+      success(dispatch, userSlice.actions.signup);
     })
     .catch((error) => {
-      fail(dispatch, userSlice.actions.getUserData, error);
+      fail(dispatch, userSlice.actions.signup, error);
+      dispatch(
+        showAlert(error.response.data.message || "Internal Server Error")
+      );
     });
 };
 

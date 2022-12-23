@@ -12,9 +12,14 @@
   @include centerContainerH;
 }
 
+.h2 {
+  text-align: center;
+  color: black;
+}
+
 .form {
   min-width: 50%;
-  min-height: 70%;
+  min-height: 80%;
   @include centerContainerV;
   justify-content: space-around;
   background-color: rgb(220, 220, 220);
@@ -23,6 +28,9 @@
 
 .span {
   font-size: 17px;
+  width: 70%;
+  @include centerContainerH;
+  justify-content: start;
 }
 
 .label {
@@ -32,8 +40,20 @@
 
 .input {
   @include input;
+  width: 100%;
+  margin: auto;
 }
 
 .login {
   @include button;
+}
+
+#btnScan {
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: $primaryColor;
+  color: white;
+  font-weight: bold;
+  margin-left: 5px;
 }

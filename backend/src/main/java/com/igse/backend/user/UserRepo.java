@@ -1,9 +1,13 @@
 package com.igse.backend.user;
 
 import com.igse.backend.ErrorHandling.AppException;
+import com.igse.backend.Voucher.Voucher;
+import com.igse.backend.Voucher.VoucherRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -22,13 +26,11 @@ public class UserRepo {
     @Autowired
     JdbcTemplate jdbcTemplate;
     @Autowired
-    UserEntityToUserConverter userEntityToUserConverter;
+    VoucherRepo voucherRepo;
 
     public User findByEmail(String username) {
         String query = "select * from users where email = ?";
-        List<User> users = jdbcTemplate.queryForList(query, username).stream()
-                .map(user -> userEntityToUserConverter.convert(user))
-                .toList();
+        List<User> users = jdbcTemplate.query(query, new Object[]{username}, new BeanPropertyRowMapper<>(User.class));
 
         if (users.isEmpty())
             return null;
@@ -68,8 +70,18 @@ public class UserRepo {
         }
     }
 
-    public void assignVoucherId(int userId, int voucherId) {
-        String query = "update vouchers set userId = ? where id = ?";
-        jdbcTemplate.update(query, userId, voucherId);
+    public void assignVoucherId(int userId, String voucherCode) {
+        try {
+            Voucher voucher = voucherRepo.getByCode(voucherCode);
+            if (!voucher.getUserId().isEmpty()){
+                throw  new AppException("Voucher already in use!");
+            }
+            else {
+                voucherRepo.updateOwner(userId, voucher.getId());
+            }
+        }catch (EmptyResultDataAccessException ex) {
+            throw  new AppException("Invalid voucher code");
+        }
+
     }
 }

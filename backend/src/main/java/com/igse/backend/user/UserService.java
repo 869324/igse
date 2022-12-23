@@ -7,6 +7,7 @@ import com.igse.backend.Voucher.VoucherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 
@@ -24,12 +25,12 @@ public class UserService {
     VoucherService voucherService;
 
 
-
+@Transactional
     public User signup(User user) throws Exception {
         try {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             User createdUser = userRepo.createUser(user);
-            userRepo.assignVoucherId(createdUser.getId(), createdUser.getVoucherId());
+            userRepo.assignVoucherId(createdUser.getId(), createdUser.getVoucher());
             return createdUser;
         } catch (Exception ex) {
             throw ex;
@@ -40,7 +41,7 @@ public class UserService {
         User user = userRepo.findByEmail(jwtUtil.extractUsername(token));
         user.setPassword(null);
         Voucher voucher = voucherService.getByUserId(user.getId());
-        user.setVoucherId(voucher.getId());
+        user.setVoucher(String.valueOf(voucher.getId()));
         return user;
     }
 
