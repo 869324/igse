@@ -1,7 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { verifyToken } from "../../StateManagement/Reducers/userReducer";
+import {
+  getUserData,
+  verifyToken,
+} from "../../StateManagement/Reducers/userReducer";
 import Header from "../Header/header";
 import styles from "./user.module.scss";
 
@@ -10,7 +13,13 @@ function User(props) {
   const dispatch = useDispatch();
 
   const tokenState = useSelector((state) => state.user.verifyToken);
-  const { token } = useSelector((state) => state.user.login);
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      dispatch(getUserData(accessToken));
+    }
+  }, []);
 
   useEffect(() => {
     const { isValid, loading } = tokenState;
@@ -22,8 +31,6 @@ function User(props) {
       dispatch(verifyToken(accessToken));
     }
   }, [tokenState]);
-
-  useEffect(() => {}, [token]);
 
   return (
     <main

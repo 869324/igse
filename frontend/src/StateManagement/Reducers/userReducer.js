@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Navigate } from "react-router-dom";
 import { success, fail } from "../../Utils/actions";
 import call from "../../Utils/api";
 
@@ -12,13 +11,14 @@ const universalState = {
 
 const initialState = {
   getUsers: { ...universalState, users: [] },
-  createUser: { ...universalState },
+  signup: { ...universalState },
   login: { ...universalState, token: null },
   deleteUser: { ...universalState },
   updateUser: { ...universalState },
   resetPassword: { ...universalState },
   configurePassword: { ...universalState },
   verifyToken: { ...universalState, isValid: false },
+  getUserData: { ...universalState, user: null },
 };
 
 const userSlice = createSlice({
@@ -39,10 +39,19 @@ const userSlice = createSlice({
       };
     },
 
+    getUserData(state, action) {
+      return {
+        ...state,
+        getUserData: { ...state.getUserData, ...action.payload },
+      };
+    },
+
     logout(state, action) {
       return {
         ...state,
         login: initialState.login,
+        verifyToken: initialState.verifyToken,
+        getUserData: initialState.getUserData,
       };
     },
 
@@ -53,10 +62,10 @@ const userSlice = createSlice({
       };
     },
 
-    createUser(state, action) {
+    signup(state, action) {
       return {
         ...state,
-        createUser: { ...state.createUser, ...action.payload },
+        signup: { ...state.signup, ...action.payload },
       };
     },
 
@@ -111,7 +120,7 @@ export const login = (user) => async (dispatch) => {
     .then((response) => {
       dispatch(
         userSlice.actions.login({
-          accessToken: response.data.token,
+          token: response.data.token,
         })
       );
       success(dispatch, userSlice.actions.login);
@@ -130,7 +139,6 @@ export const verifyToken = (token) => async (dispatch) => {
     method: "POST",
   })
     .then((response) => {
-      console.log(response);
       if (response.data) {
         dispatch(
           userSlice.actions.verifyToken({
@@ -162,6 +170,23 @@ export const verifyToken = (token) => async (dispatch) => {
     });
 };
 
+export const getUserData = (token) => async (dispatch) => {
+  dispatch(userSlice.actions.getUserData({ loading: true, tried: true }));
+
+  call({ url: `/users/data`, data: token, method: "POST" })
+    .then((response) => {
+      dispatch(
+        userSlice.actions.getUserData({
+          user: response.data,
+        })
+      );
+      success(dispatch, userSlice.actions.getUserData);
+    })
+    .catch((error) => {
+      fail(dispatch, userSlice.actions.getUserData, error);
+    });
+};
+
 // export const getUsers = (data) => async (dispatch) => {
 //   dispatch(userSlice.actions.getUsers({ loading: true, tried: true }));
 
@@ -180,15 +205,15 @@ export const verifyToken = (token) => async (dispatch) => {
 //     });
 // };
 
-export const createUser = (user) => async (dispatch) => {
-  dispatch(userSlice.actions.createUser({ loading: true, tried: true }));
+export const signup = (user) => async (dispatch) => {
+  dispatch(userSlice.actions.signup({ loading: true, tried: true }));
 
-  call(`/users/signup`, { method: "POST", body: { ...user } })
+  call({ url: `/users/signup`, data: user, method: "POST" })
     .then((response) => {
-      success(dispatch, userSlice.actions.createUser);
+      success(dispatch, userSlice.actions.getUserData);
     })
     .catch((error) => {
-      fail(dispatch, userSlice.actions.createUser, error);
+      fail(dispatch, userSlice.actions.getUserData, error);
     });
 };
 
@@ -252,6 +277,9 @@ export const userReset = (state) => async (dispatch) => {
   dispatch(userSlice.actions.universalReset({ state: state }));
 };
 
-export const { logout } = userSlice.actions;
+export const logout = (state) => async (dispatch) => {
+  localStorage.removeItem("accessToken");
+  dispatch(userSlice.actions.logout({ state: state }));
+};
 
 export default userSlice.reducer;

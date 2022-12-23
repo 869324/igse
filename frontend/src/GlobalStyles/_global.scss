@@ -108,3 +108,12 @@ $textColor: rgba(250, 250, 250, 0.8);
   border-radius: 10px;
   background-color: rgba(170, 170, 170);
 }
+
+@mixin modalClose {
+  position: relative;
+  left: 45%;
+  top: 5%;
+  color: black;
+  padding: 5px;
+  border-radius: 7px;
+}

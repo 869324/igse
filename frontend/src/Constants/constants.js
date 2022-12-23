@@ -4,3 +4,13 @@ export const LOAD_STATUS = {
   FAIL: "FAIL",
   WARNING: "WARNING",
 };
+
+export const PROPERTY_TYPES = {
+  DETACHED: "Detached",
+  SEMI_DETACHED: "Semi Detached",
+  TERRACED: "Terraced",
+  FLAT: "Flat",
+  COTTAGE: "Cottage",
+  BUNGALOW: "Bungalow",
+  MANSION: "Mansion",
+};

@@ -9,19 +9,32 @@
   color: white;
 }
 
+#h1 {
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+  color: whitesmoke;
+}
+
 #label {
   color: whitesmoke;
 }
 
 #label b {
-  color: #f6ae84;
+  color: $primaryColor;
+}
+
+.logo {
+  height: 100%;
+  @include centerContainerH;
 }
 
 #logo {
-  width: 150px;
-  height: 70px;
+  max-height: 90%;
+  width: auto;
   object-fit: cover;
   margin-left: 15px;
+  border-radius: 10px;
 }
 
 .name {
@@ -48,12 +61,12 @@
 
 .avatar {
   border-radius: 50px;
-  background-color: $secondaryColor;
+  background-color: whitesmoke;
   color: black;
 }
 
 .dropIcon {
-  color: $secondaryColor;
+  color: whitesmoke;
 }
 
 .loginDiv {
@@ -78,7 +91,7 @@
   justify-items: start;
   align-items: flex-start;
   border-radius: 5px;
-  background-color: $secondaryColor;
+  background-color: green;
   box-shadow: 0px 3px 10px rgb(0 0 0 /0.2);
   z-index: 99;
 }

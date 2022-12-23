@@ -9,17 +9,30 @@ import { MdPersonPin } from "react-icons/md";
 import { BiLogOut } from "react-icons/bi";
 import { showModal } from "../../StateManagement/Reducers/modalReducer";
 import { logout } from "../../StateManagement/Reducers/userReducer";
+import Modal from "../../Components/Modal/modal";
+import Profile from "./Profile/profile";
 
 function Header(props) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
-  const { user } = useSelector((state) => state.user.login);
   const modalState = useSelector((state) => state.modal);
+  const { user } = useSelector((state) => state.user.getUserData);
 
   return (
     <div className={styles.main}>
+      {modalState.showModal && modalState.action == "profile" && (
+        <Modal heading="Profile">
+          <Profile user={user} />
+        </Modal>
+      )}
+
+      <div className={styles.logo}>
+        <img id={styles.logo} src="/Assets/igse-1.png" />
+      </div>
+
+      <h1 id={styles.h1}>Great Shangri-La Energy</h1>
+
       <div className={styles.accDiv}>
-        <label className={styles.username}>{"Guest"}</label>
         <div
           className={styles.menuDiv}
           onMouseEnter={() => setShowMenu(true)}
@@ -34,9 +47,7 @@ function Header(props) {
                 <label
                   className={styles.menuText}
                   onClick={() => {
-                    dispatch(
-                      showModal({ showModal: true, action: "showProfile" })
-                    );
+                    dispatch(showModal({ showModal: true, action: "profile" }));
                   }}
                 >
                   Profile
