@@ -73,7 +73,9 @@ public class UserRepo {
     public void assignVoucherId(int userId, String voucherCode) {
         try {
             Voucher voucher = voucherRepo.getByCode(voucherCode);
-            if (!voucher.getUserId().isEmpty()){
+            boolean isUsed = voucherRepo.getIsUsed(voucher.getId());
+
+            if (isUsed){
                 throw  new AppException("Voucher already in use!");
             }
             else {

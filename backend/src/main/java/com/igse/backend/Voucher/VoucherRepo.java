@@ -5,6 +5,9 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Map;
+
 @Repository
 public class VoucherRepo {
     @Autowired
@@ -16,12 +19,19 @@ public class VoucherRepo {
     }
 
     public Voucher getByUserId(int userId) {
-        String query = "select * from vouchers where userId = ?";
+        String query = "select v.* from users_vouchers uv join vouchers v " +
+                "on uv.voucherId = v.id where uv.userId = ?";
         return jdbcTemplate.queryForObject(query, new Object[] {userId}, new BeanPropertyRowMapper<>(Voucher.class));
     }
 
+    public boolean getIsUsed(int voucherId) {
+        String query = "select * from users_vouchers where voucherId = ?";
+        List<Map<String, Object>> vouchers = jdbcTemplate.queryForList(query, voucherId);
+        return  vouchers.size() > 0;
+    }
+
     public void updateOwner(int userId, int voucherId) {
-        String query = "update vouchers set userId = ? where id = ?";
+        String query = "insert into users_vouchers (userId, voucherId) values (?, ?)";
         jdbcTemplate.update(query, userId, voucherId);
     }
 }

@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import {
   getUserData,
   verifyToken,
 } from "../../StateManagement/Reducers/userReducer";
 import Header from "../Header/header";
+import NavBar from "../NavBar/navBar";
+import Readings from "../Readings/readings";
 import styles from "./user.module.scss";
 
 function User(props) {
@@ -39,7 +41,16 @@ function User(props) {
     >
       <Header />
 
-      <div className={styles.content}></div>
+      <div className={styles.content}>
+        <NavBar />
+
+        <div className={styles.panel}>
+          <Routes>
+            <Route path="/" element={<Navigate to="readings" />} />
+            <Route path="readings" element={<Readings />} />
+          </Routes>
+        </div>
+      </div>
     </main>
   );
 }

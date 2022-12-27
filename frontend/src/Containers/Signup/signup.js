@@ -1,8 +1,8 @@
 import styles from "./signup.module.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { showModal } from "../../StateManagement/Reducers/modalReducer";
 import { signup } from "../../StateManagement/Reducers/userReducer";
 import { PROPERTY_TYPES } from "../../Constants/constants";
 import Scanner from "../Scanner/scanner";
@@ -144,6 +144,10 @@ function Signup(props) {
           <button className={styles.login}>
             {signupState.loading ? "Loading..." : "Signup"}
           </button>
+
+          <Link to="/Login" className={styles.signup}>
+            Login
+          </Link>
         </form>
       </div>
     </div>

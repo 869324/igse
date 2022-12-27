@@ -11,4 +11,7 @@ public class VoucherService {
     public Voucher getByUserId(int userId) {
         return voucherRepo.getByUserId(userId);
     }
+    public boolean getIsUsed(int voucherId) {
+        return voucherRepo.getIsUsed(voucherId);
+    }
 }

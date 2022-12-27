@@ -1,0 +1,44 @@
+@import "../../GlobalStyles/global";
+
+@mixin link() {
+  @include centerContainerH;
+  width: 80%;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  border-radius: 20px;
+  padding: 10px;
+  color: whitesmoke;
+  justify-content: start;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.dashboard {
+  @include centerContainerV;
+  justify-content: start;
+  width: 15%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 1);
+  overflow-y: auto;
+}
+
+.link {
+  @include link;
+  background-color: rgba(250, 250, 250, 0.3);
+}
+
+.active {
+  @include link;
+  justify-content: start;
+  background-color: $primaryColor;
+  color: whitesmoke;
+}
+
+.link:hover {
+  background-color: rgba(250, 250, 250, 0.5);
+}
+
+.tabIcon {
+  color: $secondaryColor;
+  margin-right: 10px;
+}
