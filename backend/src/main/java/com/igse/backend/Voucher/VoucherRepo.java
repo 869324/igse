@@ -18,10 +18,10 @@ public class VoucherRepo {
         return jdbcTemplate.queryForObject(query, new Object[] {code}, new BeanPropertyRowMapper<>(Voucher.class));
     }
 
-    public Voucher getByUserId(int userId) {
+    public List<Voucher> getByUserId(int userId) {
         String query = "select v.* from users_vouchers uv join vouchers v " +
                 "on uv.voucherId = v.id where uv.userId = ?";
-        return jdbcTemplate.queryForObject(query, new Object[] {userId}, new BeanPropertyRowMapper<>(Voucher.class));
+        return jdbcTemplate.query(query, new Object[] {userId}, new BeanPropertyRowMapper<>(Voucher.class));
     }
 
     public boolean getIsUsed(int voucherId) {

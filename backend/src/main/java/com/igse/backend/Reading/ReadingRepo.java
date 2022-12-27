@@ -13,7 +13,7 @@ public class ReadingRepo {
 
     public void createReading(Reading reading) {
         String query = "insert into readings (userId, date, gas, electricityDay, electricityNight) " +
-                "value (?, ?, ?, ?, ?";
+                "values (?, ?, ?, ?, ?)";
         jdbcTemplate.update(query, reading.getUserId(), reading.getDate(), reading.getGas(), reading.getElectricityDay(), reading.getElectricityNight());
     }
     public Reading getLastReading(int userId) {

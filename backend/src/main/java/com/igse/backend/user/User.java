@@ -19,4 +19,5 @@ public class User {
     private PropertyType propertyType;
     private UserRole role;
     private String voucher;
+    private float credit;
 }
