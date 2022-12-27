@@ -1,11 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./readings.module.scss";
 import moment from "moment/moment";
+import { createReading } from "../../StateManagement/Reducers/readingReducer";
 
 function Readings(props) {
+  const dispatch = useDispatch();
   const now = moment().format("YYYY-MM-DD");
 
+  const { user } = useSelector((state) => state.user.getUserData);
+  const createState = useSelector((state) => state.reading.create);
   const [formData, setFormData] = useState({});
+
+  useEffect(() => {
+    if (user) {
+      setFormData((prev) => ({
+        ...prev,
+        userId: user.id,
+      }));
+    }
+  }, [user]);
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -14,7 +28,16 @@ function Readings(props) {
     }));
   };
 
-  const onSubmit = () => {};
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const data = {
+      ...formData,
+      date: moment(formData.date).format("YYYY-MM-DD"),
+    };
+
+    dispatch(createReading(data));
+  };
 
   return (
     <form className={styles.form} onSubmit={onSubmit}>
@@ -81,7 +104,9 @@ function Readings(props) {
         </span>
       </div>
 
-      <button className={styles.submit}>Submit</button>
+      <button className={styles.submit}>
+        {createState.loading ? "Submitting ..." : "Submit"}
+      </button>
     </form>
   );
 }
