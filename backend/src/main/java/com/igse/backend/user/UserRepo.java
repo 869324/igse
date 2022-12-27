@@ -70,20 +70,8 @@ public class UserRepo {
         }
     }
 
-    public void assignVoucherId(int userId, String voucherCode) {
-        try {
-            Voucher voucher = voucherRepo.getByCode(voucherCode);
-            boolean isUsed = voucherRepo.getIsUsed(voucher.getId());
-
-            if (isUsed){
-                throw  new AppException("Voucher already in use!");
-            }
-            else {
-                voucherRepo.updateOwner(userId, voucher.getId());
-            }
-        }catch (EmptyResultDataAccessException ex) {
-            throw  new AppException("Invalid voucher code");
-        }
-
+    public void addCredit(int id, float credit) {
+        String query = "update users set credit = credit + ? where id = ?";
+        jdbcTemplate.update(query, credit, id);
     }
 }
