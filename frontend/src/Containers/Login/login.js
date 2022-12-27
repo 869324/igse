@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { showModal } from "../../StateManagement/Reducers/modalReducer";
 import { login } from "../../StateManagement/Reducers/userReducer";
 import styles from "./login.module.scss";
@@ -71,9 +71,9 @@ function Login(props) {
             {loginState.loading ? "Loading..." : "Login"}
           </button>
 
-          <button onClick={navigate("/signup")} className={styles.signup}>
+          <Link to="/signup" className={styles.signup}>
             Create Account
-          </button>
+          </Link>
         </form>
       </div>
     </div>

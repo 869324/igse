@@ -2,11 +2,13 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userReducer from "../Reducers/userReducer";
 import modalReducer from "../Reducers/modalReducer";
 import alertReducer from "../Reducers/alertReducer";
+import readingReducer from "../Reducers/readingReducer";
 
 const appReducer = combineReducers({
   user: userReducer,
   modal: modalReducer,
   alert: alertReducer,
+  reading: readingReducer,
 });
 
 const rootReducer = (state, action) => {

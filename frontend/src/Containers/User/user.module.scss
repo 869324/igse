@@ -10,5 +10,13 @@
 .content {
   width: 100vw;
   height: 93vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.3);
+  @include centerContainerH;
+}
+
+.panel {
+  width: 85%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  @include centerContainerH;
 }
