@@ -9,7 +9,6 @@ export function success(dispatch, action) {
 }
 
 export function fail(dispatch, action, error) {
-  console.log({ error });
   dispatch(
     action({
       loading: false,

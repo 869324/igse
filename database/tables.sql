@@ -9,6 +9,7 @@ create table users (
 	numOfBedrooms int,
 	propertyType enum('DETACHED', 'SEMI_DETACHED', 'TERRACED', 'FLAT', 'COTTAGE', 'BUNGALOW', 'MANSION'),
 	role enum('ADMIN', 'USER') not null,
+	credit float default 0,
 	password varchar(255) not null
 );
 
@@ -45,7 +46,6 @@ insert into users (email, password, role) values ('gse@shangrila.gov.un', '$2a$1
 insert into users (email, address, numOfBedrooms, propertyType, role, password) 
 	values ('test@gmail.com', '125 Rosewell', 4, 'MANSION', 'USER', '$2a$15$BLYu05hhFt6OsAy545AsreX4mg9kG3muftjFLA2lKfWp0KbT9kB8i');
 
-insert into users_vouchers (userId, voucherId) values ((select id from users where email = "test@gmail.com"), 1);
 
 
 -- READINGS TABLE
@@ -56,5 +56,6 @@ create table readings(
 	gas int not null,
 	electricityDay int not null,
 	electricityNight int not null,
+	paid bit not null default 0,
 	foreign key (userId) references users(id)
 );

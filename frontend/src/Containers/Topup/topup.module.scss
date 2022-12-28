@@ -1,0 +1,55 @@
+@import "../../GlobalStyles/global";
+
+.h2 {
+  text-align: center;
+  color: $primaryColor;
+}
+
+.form {
+  min-width: 50%;
+  min-height: 40%;
+  @include centerContainerV;
+  justify-content: space-around;
+  background-color: rgb(220, 220, 220);
+  border-radius: 10px;
+}
+
+.span {
+  font-size: 17px;
+  width: 70%;
+  @include centerContainerH;
+  justify-content: start;
+}
+
+.balSpan {
+  font-size: 17px;
+  width: 70%;
+  @include centerContainerH;
+  justify-content: start;
+  margin-bottom: 20px;
+}
+
+.label {
+  margin-right: 7px;
+  font-weight: bold;
+}
+
+.input {
+  @include input;
+  width: 100%;
+  margin: auto;
+}
+
+#btnScan {
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: $primaryColor;
+  color: white;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.submit {
+  @include button;
+}

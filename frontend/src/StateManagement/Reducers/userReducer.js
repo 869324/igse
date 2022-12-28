@@ -188,24 +188,6 @@ export const getUserData = (token) => async (dispatch) => {
     });
 };
 
-// export const getUsers = (data) => async (dispatch) => {
-//   dispatch(userSlice.actions.getUsers({ loading: true, tried: true }));
-
-//   axios
-//     .post(`${BASE_API_PATH}/users/get`, data)
-//     .then((response) => {
-//       dispatch(
-//         userSlice.actions.getUsers({
-//           users: response.data,
-//         })
-//       );
-//       success(dispatch, userSlice.actions.getUsers);
-//     })
-//     .catch((error) => {
-//       fail(dispatch, userSlice.actions.getUsers, error);
-//     });
-// };
-
 export const signup = (user) => async (dispatch) => {
   dispatch(userSlice.actions.signup({ loading: true, tried: true }));
 
@@ -220,62 +202,6 @@ export const signup = (user) => async (dispatch) => {
       );
     });
 };
-
-// export const updateUser = (user) => async (dispatch) => {
-//   dispatch(userSlice.actions.updateUser({ loading: true, tried: true }));
-
-//   axios
-//     .put(`${BASE_API_PATH}/users/update`, user)
-//     .then((response) => {
-//       success(dispatch, userSlice.actions.updateUser);
-//     })
-//     .catch((error) => {
-//       fail(dispatch, userSlice.actions.updateUser, error);
-//     });
-// };
-
-// export const deleteUser = (userId) => async (dispatch) => {
-//   dispatch(userSlice.actions.deleteUser({ loading: true, tried: true }));
-
-//   axios
-//     .delete(`${BASE_API_PATH}/users/delete/${userId}`)
-//     .then((response) => {
-//       success(dispatch, userSlice.actions.deleteUser);
-//     })
-//     .catch((error) => {
-//       fail(dispatch, userSlice.actions.deleteUser, error);
-//     });
-// };
-
-// export const resetPassword = (user) => async (dispatch) => {
-//   alert("loading", "loading ...");
-
-//   axios
-//     .put(`${BASE_API_PATH}/users/resetPassword`, user)
-//     .then((response) => {
-//       alert(
-//         "success",
-//         'Your password has been reset. A "Reset Password" email has been sent to you'
-//       );
-//       dispatch(userSlice.actions.logout());
-//     })
-//     .catch((error) => {
-//       alert("error", error.response.data.error || "Try again later");
-//     });
-// };
-
-// export const configurePassword = (userData) => async (dispatch) => {
-//   dispatch(userSlice.actions.configurePassword({ loading: true, tried: true }));
-
-//   axios
-//     .put(`${BASE_API_PATH}/users/configurePassword`, userData)
-//     .then((response) => {
-//       success(dispatch, userSlice.actions.configurePassword);
-//     })
-//     .catch((error) => {
-//       fail(dispatch, userSlice.actions.configurePassword, error);
-//     });
-// };
 
 export const userReset = (state) => async (dispatch) => {
   dispatch(userSlice.actions.universalReset({ state: state }));

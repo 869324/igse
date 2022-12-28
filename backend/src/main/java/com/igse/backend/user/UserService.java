@@ -54,4 +54,11 @@ public class UserService {
        userRepo.addCredit(userId, credit);
    }
 
+   public User getById(int userId) {
+    return userRepo.getById(userId);
+   }
+
+    public void updateCredit(int userId, float credit) {
+        userRepo.updateCredit(userId, credit);
+    }
 }

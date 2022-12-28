@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { INFO_TYPES } from "../../Constants/constants";
 
 const initialState = {
   alert: false,
   message: "",
+  type: null,
 };
 
 const alertSlice = createSlice({
@@ -10,8 +12,8 @@ const alertSlice = createSlice({
   initialState,
   reducers: {
     showAlert(state, action) {
-      console.log(action);
-      return { alert: true, message: action.payload };
+      const { type, message } = action.payload;
+      return { alert: true, type, message };
     },
 
     resetAlert(state, action) {
@@ -20,6 +22,12 @@ const alertSlice = createSlice({
   },
 });
 
-export const { resetAlert, showAlert } = alertSlice.actions;
+export const showAlert = (message, type) => async (dispatch) => {
+  dispatch(
+    alertSlice.actions.showAlert({ type: type || INFO_TYPES.ERROR, message })
+  );
+};
+
+export const { resetAlert } = alertSlice.actions;
 
 export default alertSlice.reducer;

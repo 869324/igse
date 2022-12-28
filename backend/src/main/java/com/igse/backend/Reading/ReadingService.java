@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class ReadingService {
@@ -27,12 +28,16 @@ public class ReadingService {
         return readingRepo.getLastReading(userId);
     }
 
+    public Reading getPreviousReading(int userId, Reading reading) {
+        return readingRepo.getPreviousReading(userId, reading);
+    }
+
     public void validateReadings(Reading reading, Reading lastReading) {
         LocalDate fromDate = dateUtils.getDate(reading.getDate());
         LocalDate toDate = dateUtils.getDate(lastReading.getDate());
 
-        if (fromDate.compareTo(toDate) < 0) {
-            throw new AppException("The entered date is earlier than the last submitted reading's date!");
+        if (fromDate.compareTo(toDate) <= 0) {
+            throw new AppException("The entered date is lesser/equal to the last submitted reading's date!");
         }
          else if (reading.getGas() < lastReading.getGas()) {
              throw new AppException("The entered gas reading is lower than the last submitted reading");
@@ -43,5 +48,17 @@ public class ReadingService {
         else if (reading.getElectricityNight() < lastReading.getElectricityNight()) {
             throw new AppException("The entered electricity (Night) reading is lower than the last submitted reading");
         }
+    }
+
+    public List<Reading> getUnpaidReadings(int userId) {
+        return readingRepo.getUnpaidReadings(userId);
+    }
+
+    public Reading getByDate(int userId, String date) {
+        return readingRepo.getByDate(userId, date);
+    }
+
+    public void markAsPaid(int readingId) {
+        readingRepo.markAsPaid(readingId);
     }
 }

@@ -74,4 +74,18 @@ public class UserRepo {
         String query = "update users set credit = credit + ? where id = ?";
         jdbcTemplate.update(query, credit, id);
     }
+
+    public User getById(int userId) {
+        try {
+            String query = "select * from users where id = ?";
+            return jdbcTemplate.queryForObject(query, new Object[] {userId}, new BeanPropertyRowMapper<>(User.class));
+        } catch (EmptyResultDataAccessException ex) {
+            return null;
+        }
+    }
+
+    public void updateCredit(int userId, float credit) {
+        String query = "update users set credit = ? where id = ?";
+        jdbcTemplate.update(query, credit, userId);
+    }
 }

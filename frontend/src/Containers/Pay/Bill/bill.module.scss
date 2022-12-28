@@ -1,0 +1,76 @@
+@import "../../../GlobalStyles/global";
+
+.main {
+  width: 70%;
+  height: 70%;
+  @include modalContent;
+  background-color: rgb(230, 230, 230);
+}
+
+.billDiv {
+  width: 100%;
+  @include centerContainerH;
+  justify-content: space-between;
+}
+
+.billDiv2 {
+  width: 49%;
+  @include centerContainerH;
+  margin-bottom: 30px;
+}
+
+.infoDiv {
+  width: 80%;
+  @include centerContainerH;
+  justify-content: start;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.label {
+  color: $primaryColor;
+  margin-right: 10px;
+}
+
+.input {
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 18px;
+  width: 100%;
+}
+
+.actions {
+  width: 100%;
+  @include centerContainerH;
+  margin-top: 60px;
+}
+
+.pay {
+  @include button;
+  color: white;
+}
+
+.header {
+  padding: 0px 30px;
+  @include centerContainerH;
+}
+
+.h2 {
+  text-align: center;
+  color: teal;
+}
+
+.close {
+  position: relative;
+  color: $primaryColor;
+  padding: 5px;
+  border-radius: 7px;
+  top: 15%;
+  left: 45%;
+}
+
+.close:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
