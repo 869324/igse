@@ -59,11 +59,11 @@ public class BillService {
         Reading reading = readingService.getByDate(bill.getUserId(), bill.getToDate());
         User user = userService.getById(bill.getUserId());
 
-        if (user.getCredit() < bill.getTotal()) {
+        if (user.getCredit().get() < bill.getTotal()) {
             throw new AppException("You do not have enough credit to make this payment!");
         } else {
             readingService.markAsPaid(reading.getId());
-            userService.updateCredit(user.getId(), user.getCredit() - bill.getTotal());
+            userService.updateCredit(user.getId(), user.getCredit().get() - bill.getTotal());
         }
     }
 

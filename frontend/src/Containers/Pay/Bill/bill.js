@@ -14,9 +14,9 @@ function Bill(props) {
   const payState = useSelector((state) => state.bill.pay);
 
   useEffect(() => {
-    const { status } = payState;
+    const { tried } = payState;
 
-    if (status) {
+    if (tried) {
       setSelectedBill(null);
       dispatch(getBills(bill.userId));
     }

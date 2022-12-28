@@ -5,6 +5,7 @@ import alertReducer from "../Reducers/alertReducer";
 import readingReducer from "../Reducers/readingReducer";
 import creditReducer from "../Reducers/creditReducer";
 import billReducer from "../Reducers/billReducer";
+import pricesReducer from "../Reducers/pricesReducer";
 
 const appReducer = combineReducers({
   user: userReducer,
@@ -13,6 +14,7 @@ const appReducer = combineReducers({
   reading: readingReducer,
   credit: creditReducer,
   bill: billReducer,
+  prices: pricesReducer,
 });
 
 const rootReducer = (state, action) => {

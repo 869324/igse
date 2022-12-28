@@ -50,10 +50,10 @@ public class UserRepo {
                                     connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
                             ps.setString(1, user.getEmail());
-                            ps.setString(2, user.getAddress());
-                            ps.setString(3, user.getPropertyType().name());
+                            ps.setString(2, user.getAddress().get());
+                            ps.setString(3, user.getPropertyType().get().name());
                             ps.setString(4, user.getRole().name());
-                            ps.setInt(5, user.getNumOfBedrooms());
+                            ps.setInt(5, user.getNumOfBedrooms().get());
                             ps.setString(6, user.getPassword());
 
                             return ps;

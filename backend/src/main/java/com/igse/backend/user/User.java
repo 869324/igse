@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Optional;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,10 +16,10 @@ public class User {
     private int id;
     private String email;
     private String password;
-    private String address;
-    private int numOfBedrooms;
-    private PropertyType propertyType;
+    private Optional<String> address;
+    private Optional<Integer> numOfBedrooms;
+    private Optional<PropertyType> propertyType;
     private UserRole role;
-    private String voucher;
-    private float credit;
+    private Optional<String> voucher;
+    private Optional<Float> credit;
 }
