@@ -18,8 +18,6 @@ import java.util.List;
 @Service
 public class BillService {
     @Autowired
-    BillRepo billRepo;
-    @Autowired
     ReadingService readingService;
     @Autowired
     PricesService pricesService;
@@ -68,4 +66,5 @@ public class BillService {
             userService.updateCredit(user.getId(), user.getCredit() - bill.getTotal());
         }
     }
+
 }
