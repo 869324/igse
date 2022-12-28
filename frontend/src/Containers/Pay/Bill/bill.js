@@ -1,11 +1,32 @@
 import styles from "./bill.module.scss";
 import { AiOutlineClose } from "react-icons/ai";
-import { useDispatch } from "react-redux";
-import { pay } from "../../../StateManagement/Reducers/billReducer";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  billReset,
+  getBills,
+  pay,
+} from "../../../StateManagement/Reducers/billReducer";
+import { useEffect } from "react";
 
 function Bill(props) {
   const { bill, setSelectedBill } = props;
   const dispatch = useDispatch();
+  const payState = useSelector((state) => state.bill.pay);
+
+  useEffect(() => {
+    const { status } = payState;
+
+    if (status) {
+      setSelectedBill(null);
+      dispatch(getBills(bill.userId));
+    }
+  }, [payState]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(billReset("pay"));
+    };
+  }, []);
 
   return (
     <div className={styles.main}>
@@ -78,7 +99,7 @@ function Bill(props) {
 
       <div className={styles.actions}>
         <button className={styles.pay} onClick={() => dispatch(pay(bill))}>
-          Pay
+          {payState.loading ? "Processing ..." : "Pay"}
         </button>
       </div>
     </div>

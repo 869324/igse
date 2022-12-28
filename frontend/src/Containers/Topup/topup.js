@@ -60,7 +60,7 @@ function Topup(props) {
 
       <span className={styles.balSpan}>
         <label className={styles.label}>Balance:</label>
-        <label className={styles.value}>{user.credit}</label>
+        <label className={styles.value}>{user ? user.credit : ""}</label>
       </span>
 
       <span className={styles.span}>

@@ -12,7 +12,7 @@ function InfoModal(props) {
   return (
     <div
       className={styles.modalContent}
-      style={{ width: "30%", height: "30%" }}
+      style={{ width: "35%", height: "35%" }}
     >
       <div className={styles.modalMessage}>
         <p className={styles.message}>{message}</p>

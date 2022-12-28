@@ -50,10 +50,10 @@ const billSlice = createSlice({
   },
 });
 
-export const pay = (billData) => async (dispatch) => {
+export const pay = (bill) => async (dispatch) => {
   dispatch(billSlice.actions.pay({ loading: true, tried: true }));
 
-  call({ url: `/bill/pay`, data: billData, method: "POST" })
+  call({ url: `/bill/pay`, data: bill, method: "POST" })
     .then((response) => {
       success(dispatch, billSlice.actions.pay);
       dispatch(showAlert("Payment successfull", INFO_TYPES.SUCCESS));
@@ -81,6 +81,10 @@ export const getBills = (userId) => async (dispatch) => {
     .catch((error) => {
       fail(dispatch, billSlice.actions.getBills, error);
     });
+};
+
+export const billReset = (state) => async (dispatch) => {
+  dispatch(billSlice.actions.universalReset({ state: state }));
 };
 
 export default billSlice.reducer;

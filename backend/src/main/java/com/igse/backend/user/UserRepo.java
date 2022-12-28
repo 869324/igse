@@ -83,4 +83,9 @@ public class UserRepo {
             return null;
         }
     }
+
+    public void updateCredit(int userId, float credit) {
+        String query = "update users set credit = ? where id = ?";
+        jdbcTemplate.update(query, credit, userId);
+    }
 }

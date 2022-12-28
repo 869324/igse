@@ -54,4 +54,9 @@ public class ReadingRepo {
             return null;
         }
     }
+
+    public void markAsPaid(int readingId) {
+        String query = "update readings set paid = 1 where id = ?";
+        jdbcTemplate.update(query, readingId);
+    }
 }

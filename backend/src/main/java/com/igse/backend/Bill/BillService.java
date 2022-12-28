@@ -62,9 +62,10 @@ public class BillService {
         User user = userService.getById(bill.getUserId());
 
         if (user.getCredit() < bill.getTotal()) {
-            throw new AppException("You do not have enough credit to make thi payment!");
+            throw new AppException("You do not have enough credit to make this payment!");
         } else {
-            
+            readingService.markAsPaid(reading.getId());
+            userService.updateCredit(user.getId(), user.getCredit() - bill.getTotal());
         }
     }
 }

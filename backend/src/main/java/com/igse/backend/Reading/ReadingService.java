@@ -57,4 +57,8 @@ public class ReadingService {
     public Reading getByDate(int userId, String date) {
         return readingRepo.getByDate(userId, date);
     }
+
+    public void markAsPaid(int readingId) {
+        readingRepo.markAsPaid(readingId);
+    }
 }
