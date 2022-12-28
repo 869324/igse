@@ -1,15 +1,12 @@
-package com.igse.backend.Bill;
+package com.igse.backend.Prices;
 
 import lombok.Data;
 
 @Data
-public class Bill {
-    private int userId;
-    private String fromDate;
-    private String toDate;
+public class Prices {
+    private int id;
     private float gas;
     private float electricityDay;
     private float electricityNight;
     private float standingCharge;
-    private float total;
 }

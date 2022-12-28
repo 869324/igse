@@ -6,16 +6,16 @@ import Login from "./Containers/Login/login";
 import Signup from "./Containers/Signup/signup";
 import { useSelector } from "react-redux";
 import Modal from "./Components/Modal/modal";
-import ErrorModal from "./Components/ErrorModal/errorModal";
+import InfoModal from "./Components/InfoModal/infoModal";
 
 function App() {
-  const { alert, message } = useSelector((state) => state.alert);
+  const alertState = useSelector((state) => state.alert);
 
   return (
     <div>
-      {alert && (
+      {alertState.alert && (
         <Modal>
-          <ErrorModal alert={alert} message={message} />
+          <InfoModal {...alertState} />
         </Modal>
       )}
 

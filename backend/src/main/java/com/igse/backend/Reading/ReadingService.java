@@ -36,8 +36,8 @@ public class ReadingService {
         LocalDate fromDate = dateUtils.getDate(reading.getDate());
         LocalDate toDate = dateUtils.getDate(lastReading.getDate());
 
-        if (fromDate.compareTo(toDate) < 0) {
-            throw new AppException("The entered date is earlier than the last submitted reading's date!");
+        if (fromDate.compareTo(toDate) <= 0) {
+            throw new AppException("The entered date is lesser/equal to the last submitted reading's date!");
         }
          else if (reading.getGas() < lastReading.getGas()) {
              throw new AppException("The entered gas reading is lower than the last submitted reading");
@@ -52,5 +52,9 @@ public class ReadingService {
 
     public List<Reading> getUnpaidReadings(int userId) {
         return readingRepo.getUnpaidReadings(userId);
+    }
+
+    public Reading getByDate(int userId, String date) {
+        return readingRepo.getByDate(userId, date);
     }
 }

@@ -12,17 +12,17 @@ const universalState = {
 };
 
 const initialState = {
-  create: { ...universalState },
+  topup: { ...universalState },
 };
 
-const readingSlice = createSlice({
-  name: "reading",
+const creditSlice = createSlice({
+  name: "credit",
   initialState,
   reducers: {
-    create(state, action) {
+    topup(state, action) {
       return {
         ...state,
-        create: { ...state.create, ...action.payload },
+        topup: { ...state.topup, ...action.payload },
       };
     },
 
@@ -42,20 +42,20 @@ const readingSlice = createSlice({
   },
 });
 
-export const createReading = (reading) => async (dispatch) => {
-  dispatch(readingSlice.actions.create({ loading: true, tried: true }));
+export const topup = (credit) => async (dispatch) => {
+  dispatch(creditSlice.actions.topup({ loading: true, tried: true }));
 
-  call({ url: `/readings/create`, data: reading, method: "POST" })
+  call({ url: `/credit/topup`, data: credit, method: "POST" })
     .then((response) => {
-      success(dispatch, readingSlice.actions.create);
-      dispatch(showAlert("Readings have been submitted", INFO_TYPES.SUCCESS));
+      success(dispatch, creditSlice.actions.topup);
+      dispatch(showAlert("Credit has been added", INFO_TYPES.SUCCESS));
     })
     .catch((error) => {
-      fail(dispatch, readingSlice.actions.create, error);
+      fail(dispatch, creditSlice.actions.topup, error);
       dispatch(
         showAlert(error.response.data.message || "Internal Server Error")
       );
     });
 };
 
-export default readingSlice.reducer;
+export default creditSlice.reducer;

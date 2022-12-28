@@ -10,7 +10,7 @@ function Readings(props) {
 
   const { user } = useSelector((state) => state.user.getUserData);
   const createState = useSelector((state) => state.reading.create);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({ date: now });
 
   useEffect(() => {
     if (user) {
@@ -20,6 +20,18 @@ function Readings(props) {
       }));
     }
   }, [user]);
+
+  useEffect(() => {
+    const { status } = createState;
+    if (status) {
+      setFormData({
+        gas: "",
+        date: "",
+        electricityDay: "",
+        electricityNight: "",
+      });
+    }
+  }, [createState]);
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -53,7 +65,7 @@ function Readings(props) {
               onChange={handleChange}
               name="date"
               required
-              defaultValue={now}
+              value={formData.date}
             />
           </span>
         </span>
@@ -67,6 +79,7 @@ function Readings(props) {
               onChange={handleChange}
               name="gas"
               required
+              value={formData.gas}
             />
           </span>
         </span>
@@ -84,6 +97,7 @@ function Readings(props) {
               onChange={handleChange}
               name="electricityDay"
               required
+              value={formData.electricityDay}
             />
           </span>
         </span>
@@ -99,6 +113,7 @@ function Readings(props) {
               onChange={handleChange}
               name="electricityNight"
               required
+              value={formData.electricityNight}
             />
           </span>
         </span>

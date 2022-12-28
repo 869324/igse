@@ -45,4 +45,13 @@ public class ReadingRepo {
         }catch (EmptyResultDataAccessException ignored) {}
         return previousReading;
     }
+
+    public Reading getByDate(int userId, String date) {
+        try {
+            String query = "select * from readings where userId = ? and date = date(?)";
+            return jdbcTemplate.queryForObject(query, new Object[]{userId, date}, new BeanPropertyRowMapper<>(Reading.class));
+        } catch (EmptyResultDataAccessException ex) {
+            return null;
+        }
+    }
 }

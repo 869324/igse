@@ -14,3 +14,8 @@ export const PROPERTY_TYPES = {
   BUNGALOW: "Bungalow",
   MANSION: "Mansion",
 };
+
+export const INFO_TYPES = {
+  ERROR: "ERROR",
+  SUCCESS: "SUCCESS",
+};

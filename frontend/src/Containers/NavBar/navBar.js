@@ -26,17 +26,17 @@ function NavBar() {
         }
       >
         <GiPayMoney className={styles.tabIcon} size={21} />
-        Pay Bill
+        Pay Bills
       </NavLink>
 
       <NavLink
-        to="topUp"
+        to="topup"
         className={(navData) =>
           navData.isActive ? styles.active : styles.link
         }
       >
         <HiCreditCard className={styles.tabIcon} size={21} />
-        Top Up
+        Credit
       </NavLink>
     </div>
   );

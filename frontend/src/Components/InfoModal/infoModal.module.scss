@@ -8,9 +8,10 @@
 }
 
 .message {
-  text-align: center;
+  width: 90%;
   color: black;
   font-size: 17px;
+  padding: 10px;
 }
 
 #close {
@@ -20,6 +21,10 @@
   background-color: transparent;
 }
 
-.icon {
+.iconOk {
+  color: green;
+}
+
+.iconError {
   color: red;
 }

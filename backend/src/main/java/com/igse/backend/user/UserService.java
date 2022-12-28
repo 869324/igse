@@ -54,4 +54,8 @@ public class UserService {
        userRepo.addCredit(userId, credit);
    }
 
+   public User getById(int userId) {
+    return userRepo.getById(userId);
+   }
+
 }
