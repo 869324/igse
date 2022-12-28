@@ -19,6 +19,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 @Slf4j
@@ -87,5 +88,16 @@ public class UserRepo {
     public void updateCredit(int userId, float credit) {
         String query = "update users set credit = ? where id = ?";
         jdbcTemplate.update(query, credit, userId);
+    }
+
+    public int getPropertyCount(String type) {
+        String query = "select * from users where propertyType = ?";
+        List<Map<String, Object>> list = jdbcTemplate.queryForList(query, type);
+        return list.size();
+    }
+
+    public List<User> getByPropertyType(String propertyType, int numOfBedrooms) {
+        String query = "select * from users where propertyType = ? and numOfBedrooms = ?";
+        return jdbcTemplate.query(query, new Object[]{propertyType, numOfBedrooms}, new BeanPropertyRowMapper<>(User.class));
     }
 }
