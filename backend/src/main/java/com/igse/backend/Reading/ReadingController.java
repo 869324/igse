@@ -18,4 +18,9 @@ public class ReadingController {
         return null;
     }
 
+    @GetMapping(value = "getUserReadings/{userId}")
+    public Object getUserReadings(@PathVariable(value = "userId") String userId){
+        return readingService.getUserReadings(Integer.parseInt(userId));
+    }
+
 }

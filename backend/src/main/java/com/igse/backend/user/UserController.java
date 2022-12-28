@@ -20,7 +20,12 @@ public class UserController {
     }
 
     @PostMapping(value = "/data")
-    public Object getUserData(@RequestBody String token) throws Exception {
+    public Object getUserData(@RequestBody String token) {
         return userService.getUserData(token);
+    }
+
+    @GetMapping(value = "/getUsers")
+    public Object getUsers() {
+        return userService.getUsers();
     }
 }

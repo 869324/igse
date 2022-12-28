@@ -100,4 +100,9 @@ public class UserRepo {
         String query = "select * from users where propertyType = ? and numOfBedrooms = ?";
         return jdbcTemplate.query(query, new Object[]{propertyType, numOfBedrooms}, new BeanPropertyRowMapper<>(User.class));
     }
+
+    public List<User> getUsers() {
+        String query = "select * from users where role = 'USER'";
+        return jdbcTemplate.query(query, new Object[]{}, new BeanPropertyRowMapper<>(User.class));
+    }
 }

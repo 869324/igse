@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -102,5 +103,12 @@ public class UserService {
             return total;
         }
         return 0;
+    }
+
+    public List<User> getUsers() {
+    return userRepo.getUsers().stream().map(user -> {
+        user.setPassword(null);
+        return user;
+    }).collect(Collectors.toList());
     }
 }

@@ -6,6 +6,7 @@ import {
   verifyToken,
 } from "../../StateManagement/Reducers/userReducer";
 import Header from "../Header/header";
+import MeterReadings from "../MeterReadings/meterReadings";
 import NavBar from "../NavBar/navBar";
 import Prices from "../Prices/prices";
 import Readings from "../Readings/readings";
@@ -52,8 +53,8 @@ function Admin(props) {
           <Routes>
             <Route path="/" element={<Navigate to="prices" />} />
             <Route path="prices" element={<Prices />} />
-            {/* <Route path="meter-readings" element={<Topup />} />
-            <Route path="statistics" element={<Pay />} /> */}
+            <Route path="meter-readings" element={<MeterReadings />} />
+            {/* <Route path="statistics" element={<Pay />} /> */}
           </Routes>
         </div>
       </div>

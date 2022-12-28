@@ -1,6 +1,7 @@
 package com.igse.backend.Reading;
 
 import com.igse.backend.Voucher.Voucher;
+import com.igse.backend.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -58,5 +59,10 @@ public class ReadingRepo {
     public void markAsPaid(int readingId) {
         String query = "update readings set paid = 1 where id = ?";
         jdbcTemplate.update(query, readingId);
+    }
+
+    public List<Reading> getUserReadings(int userId) {
+        String query = "select * from readings where userId = ?";
+        return jdbcTemplate.query(query, new Object[] {}, new BeanPropertyRowMapper<>(Reading.class));
     }
 }

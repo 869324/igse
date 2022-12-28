@@ -2,6 +2,7 @@ package com.igse.backend.Reading;
 
 import com.igse.backend.ErrorHandling.AppException;
 import com.igse.backend.Utils.DateUtils;
+import com.igse.backend.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,5 +61,9 @@ public class ReadingService {
 
     public void markAsPaid(int readingId) {
         readingRepo.markAsPaid(readingId);
+    }
+
+    public List<Reading> getUserReadings(int userId) {
+        return readingRepo.getUserReadings(userId);
     }
 }
