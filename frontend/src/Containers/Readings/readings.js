@@ -26,7 +26,7 @@ function Readings(props) {
     if (status) {
       setFormData({
         gas: "",
-        date: "",
+        date: now,
         electricityDay: "",
         electricityNight: "",
       });
@@ -48,7 +48,14 @@ function Readings(props) {
       date: moment(formData.date).format("YYYY-MM-DD"),
     };
 
-    dispatch(createReading(data));
+    if (!data.userId) {
+      if (user) {
+        data.userId = user.id;
+        dispatch(createReading(data));
+      }
+    } else {
+      dispatch(createReading(data));
+    }
   };
 
   return (

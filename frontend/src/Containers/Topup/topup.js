@@ -15,6 +15,11 @@ function Topup(props) {
   const [scan, setScan] = useState(false);
 
   useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    dispatch(getUserData(token));
+  }, []);
+
+  useEffect(() => {
     const { status } = topupState;
     if (status) {
       setFormData({

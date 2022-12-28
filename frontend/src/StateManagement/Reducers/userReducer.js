@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { success, fail } from "../../Utils/actions";
 import call from "../../Utils/api";
 import { showAlert } from "./alertReducer";
+import { INFO_TYPES } from "../../Constants/constants";
 
 const universalState = {
   tried: false,
@@ -194,6 +195,7 @@ export const signup = (user) => async (dispatch) => {
   call({ url: `/users/signup`, data: user, method: "POST" })
     .then((response) => {
       success(dispatch, userSlice.actions.signup);
+      dispatch(showAlert("Sign up successful!", INFO_TYPES.SUCCESS));
     })
     .catch((error) => {
       fail(dispatch, userSlice.actions.signup, error);

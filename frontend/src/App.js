@@ -7,6 +7,7 @@ import Signup from "./Containers/Signup/signup";
 import { useSelector } from "react-redux";
 import Modal from "./Components/Modal/modal";
 import InfoModal from "./Components/InfoModal/infoModal";
+import Admin from "./Containers/Admin/admin";
 
 function App() {
   const alertState = useSelector((state) => state.alert);
@@ -24,6 +25,7 @@ function App() {
         <Route path="/user/*" element={<User />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/admin/*" element={<Admin />} />
       </Routes>
     </div>
   );

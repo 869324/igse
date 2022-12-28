@@ -18,8 +18,13 @@ public class CreditService {
     @Autowired
     UserRepo userRepo;
     public void topUp(User user) {
-        Voucher voucher = voucherService.getByCode(user.getVoucher());
-        addCredit(user.getId(),  voucher);
+        try {
+            Voucher voucher = voucherService.getByCode(user.getVoucher().get());
+            addCredit(user.getId(),  voucher);
+        } catch (EmptyResultDataAccessException ex) {
+            throw new AppException("Invalid voucher code!");
+        }
+
     }
 
     @Transactional
