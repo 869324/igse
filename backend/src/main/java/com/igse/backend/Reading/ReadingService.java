@@ -66,4 +66,17 @@ public class ReadingService {
     public List<Reading> getUserReadings(int userId) {
         return readingRepo.getUserReadings(userId);
     }
+    public Reading getLastBillableReading(int userId) {
+        Reading lastReading = readingRepo.getLastReading(userId);
+        if (lastReading != null) {
+            Reading previousReading = readingRepo.getPreviousReading(userId, lastReading);
+            if (previousReading != null) {
+                return lastReading;
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
 }

@@ -63,6 +63,7 @@ public class ReadingRepo {
 
     public List<Reading> getUserReadings(int userId) {
         String query = "select * from readings where userId = ?";
-        return jdbcTemplate.query(query, new Object[] {}, new BeanPropertyRowMapper<>(Reading.class));
+        return jdbcTemplate.query(query, new Object[] {userId}, new BeanPropertyRowMapper<>(Reading.class));
     }
+
 }

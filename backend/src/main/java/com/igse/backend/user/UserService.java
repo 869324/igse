@@ -19,6 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -62,7 +63,6 @@ public class UserService {
         user.setPassword(null);
         return user;
     }
-
 
    public void addCredit(int userId, float credit) {
        userRepo.addCredit(userId, credit);
@@ -111,4 +111,6 @@ public class UserService {
         return user;
     }).collect(Collectors.toList());
     }
+
+
 }

@@ -1,44 +1,13 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
-import {
-  getUserData,
-  verifyToken,
-} from "../../StateManagement/Reducers/userReducer";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Header from "../Header/header";
 import NavBar from "../NavBar/navBar";
 import Readings from "../Readings/readings";
 import Topup from "../Topup/topup";
 import styles from "./user.module.scss";
 import Pay from "../Pay/pay";
+import Admin from "../Admin/admin";
 
 function User(props) {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const tokenState = useSelector((state) => state.user.verifyToken);
-  const { user } = useSelector((state) => state.user.getUserData);
-
-  useEffect(() => {
-    if (!user) {
-      const accessToken = localStorage.getItem("accessToken");
-      if (accessToken) {
-        dispatch(getUserData(accessToken));
-      }
-    }
-  }, [user]);
-
-  useEffect(() => {
-    const { isValid, loading } = tokenState;
-    const accessToken = localStorage.getItem("accessToken");
-
-    if (!accessToken) {
-      navigate("/login");
-    } else if (!isValid && !loading) {
-      dispatch(verifyToken(accessToken));
-    }
-  }, [tokenState]);
-
   return (
     <main
       className={styles.main}

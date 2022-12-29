@@ -15,10 +15,6 @@ const initialState = {
   getUsers: { ...universalState, users: [] },
   signup: { ...universalState },
   login: { ...universalState, token: null },
-  deleteUser: { ...universalState },
-  updateUser: { ...universalState },
-  resetPassword: { ...universalState },
-  configurePassword: { ...universalState },
   verifyToken: { ...universalState, isValid: false },
   getUserData: { ...universalState, user: null },
 };
@@ -68,34 +64,6 @@ const userSlice = createSlice({
       return {
         ...state,
         signup: { ...state.signup, ...action.payload },
-      };
-    },
-
-    updateUser(state, action) {
-      return {
-        ...state,
-        updateUser: { ...state.updateUser, ...action.payload },
-      };
-    },
-
-    deleteUser(state, action) {
-      return {
-        ...state,
-        deleteUser: { ...state.deleteUser, ...action.payload },
-      };
-    },
-
-    resetPassword(state, action) {
-      return {
-        ...state,
-        resetPassword: { ...state.resetPassword, ...action.payload },
-      };
-    },
-
-    configurePassword(state, action) {
-      return {
-        ...state,
-        configurePassword: { ...state.configurePassword, ...action.payload },
       };
     },
 
@@ -180,6 +148,23 @@ export const getUserData = (token) => async (dispatch) => {
       dispatch(
         userSlice.actions.getUserData({
           user: response.data,
+        })
+      );
+      success(dispatch, userSlice.actions.getUserData);
+    })
+    .catch((error) => {
+      fail(dispatch, userSlice.actions.getUserData, error);
+    });
+};
+
+export const getUsers = () => async (dispatch) => {
+  dispatch(userSlice.actions.getUsers({ loading: true, tried: true }));
+
+  call({ url: `/users/getUsers`, data: {}, method: "GET" })
+    .then((response) => {
+      dispatch(
+        userSlice.actions.getUsers({
+          users: response.data,
         })
       );
       success(dispatch, userSlice.actions.getUserData);

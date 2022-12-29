@@ -15,6 +15,7 @@ function NavBar() {
     <NavLink
       to="readings"
       className={(navData) => (navData.isActive ? styles.active : styles.link)}
+      key={0}
     >
       <FaTachometerAlt className={styles.tabIcon} size={21} />
       Submit Readings
@@ -23,6 +24,7 @@ function NavBar() {
     <NavLink
       to="pay"
       className={(navData) => (navData.isActive ? styles.active : styles.link)}
+      key={1}
     >
       <GiPayMoney className={styles.tabIcon} size={21} />
       Pay Bills
@@ -31,6 +33,7 @@ function NavBar() {
     <NavLink
       to="topup"
       className={(navData) => (navData.isActive ? styles.active : styles.link)}
+      key={2}
     >
       <HiCreditCard className={styles.tabIcon} size={21} />
       Credit
@@ -41,6 +44,7 @@ function NavBar() {
     <NavLink
       to="prices"
       className={(navData) => (navData.isActive ? styles.active : styles.link)}
+      key={0}
     >
       <GiPayMoney className={styles.tabIcon} size={21} />
       Prices
@@ -49,6 +53,7 @@ function NavBar() {
     <NavLink
       to="user-readings"
       className={(navData) => (navData.isActive ? styles.active : styles.link)}
+      key={1}
     >
       <FaTachometerAlt className={styles.tabIcon} size={21} />
       Meter Readings
@@ -57,6 +62,7 @@ function NavBar() {
     <NavLink
       to="statistics"
       className={(navData) => (navData.isActive ? styles.active : styles.link)}
+      key={2}
     >
       <ImStatsDots className={styles.tabIcon} size={21} />
       Statistics

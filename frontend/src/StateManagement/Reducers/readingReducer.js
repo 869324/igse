@@ -13,6 +13,7 @@ const universalState = {
 
 const initialState = {
   create: { ...universalState },
+  getUserReadings: { ...universalState, readings: [] },
 };
 
 const readingSlice = createSlice({
@@ -23,6 +24,13 @@ const readingSlice = createSlice({
       return {
         ...state,
         create: { ...state.create, ...action.payload },
+      };
+    },
+
+    getUserReadings(state, action) {
+      return {
+        ...state,
+        getUserReadings: { ...state.getUserReadings, ...action.payload },
       };
     },
 
@@ -55,6 +63,23 @@ export const createReading = (reading) => async (dispatch) => {
       dispatch(
         showAlert(error.response.data.message || "Internal Server Error")
       );
+    });
+};
+
+export const getUserReadings = (userId) => async (dispatch) => {
+  dispatch(
+    readingSlice.actions.getUserReadings({ loading: true, tried: true })
+  );
+
+  call({ url: `/readings/getUserReadings/${userId}`, data: {}, method: "GET" })
+    .then((response) => {
+      dispatch(
+        readingSlice.actions.getUserReadings({ readings: response.data })
+      );
+      success(dispatch, readingSlice.actions.getUserReadings);
+    })
+    .catch((error) => {
+      fail(dispatch, readingSlice.actions.getUserReadings, error);
     });
 };
 

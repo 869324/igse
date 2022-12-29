@@ -10,7 +10,12 @@ import {
 function Prices(props) {
   const dispatch = useDispatch();
 
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    gas: 0,
+    electricityDay: 0,
+    electricityNight: 0,
+  });
+
   const { prices } = useSelector((state) => state.prices.getPrices);
   const updateState = useSelector((state) => state.prices.updatePrices);
 

@@ -17,11 +17,7 @@ function Login(props) {
     if (status && token) {
       localStorage.setItem("accessToken", token);
 
-      if (formData.username == "gse@shangrila.gov.un") {
-        navigate("/admin");
-      } else {
-        navigate("/user");
-      }
+      navigate("/igse");
     } else if (tried) {
       dispatch(showModal({ status: true, action: "error" }));
     }
