@@ -1,0 +1,40 @@
+@import "../../GlobalStyles/global";
+
+.main {
+  width: 80%;
+  height: 80%;
+  background-color: rgb(250, 250, 250);
+  border-radius: 10px;
+}
+
+h2 {
+  text-align: center;
+}
+
+.table {
+  @include table;
+
+  thead {
+    @include rowHeader;
+  }
+
+  th {
+    @include tableHeader;
+  }
+
+  tr {
+    @include rowData;
+  }
+
+  .hDelete {
+    text-align: center;
+  }
+}
+
+.rowData {
+  @include rowData;
+}
+
+.rowData:hover {
+  @include rowDataHover;
+}

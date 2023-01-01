@@ -1,0 +1,116 @@
+$primaryColor: green;
+$secondaryColor: #f6ae84;
+$textColor: rgba(250, 250, 250, 0.8);
+$forestGreen: #006e33;
+
+@mixin defaultBackground() {
+  width: 100vw;
+  height: 100vh;
+  background-position: center;
+  background-size: cover;
+  background-color: black;
+}
+
+@mixin overlay() {
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%;
+}
+
+@mixin centerContainerH() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin centerContainerV() {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin inputDiv {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+@mixin input($bg: transparent, $color: black) {
+  border: none;
+  background-color: $bg;
+  color: $color;
+  font-size: 17px;
+  font-weight: 500;
+  padding: 10px;
+  border-radius: 7px;
+  outline: 2px solid $primaryColor;
+}
+
+@mixin button() {
+  padding: 10px 60px;
+  font-weight: bold;
+  font-size: 17px;
+  border: none;
+  background-color: $primaryColor;
+  border-radius: 15px;
+  color: whitesmoke;
+}
+
+@mixin table() {
+  width: 95%;
+  max-height: 90%;
+  margin: auto;
+  border-spacing: 0px 10px;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+@mixin rowHeader {
+  color: $primaryColor;
+}
+
+@mixin tableHeader {
+  color: $primaryColor;
+  text-align: start;
+}
+
+@mixin rowData {
+  color: black;
+  cursor: pointer;
+  font-size: 17px;
+}
+
+@mixin tableData {
+  padding: 7px;
+}
+
+@mixin rowDataHover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+@mixin modalBg() {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  @include centerContainerH;
+}
+
+@mixin modalContent() {
+  border-radius: 10px;
+  background-color: rgba(170, 170, 170);
+}
+
+@mixin modalClose {
+  position: relative;
+  left: 45%;
+  top: 5%;
+  color: black;
+  padding: 5px;
+  border-radius: 7px;
+}

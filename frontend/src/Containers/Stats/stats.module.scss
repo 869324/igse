@@ -1,0 +1,15 @@
+@import "../../GlobalStyles/global";
+
+.main {
+  width: 80%;
+  height: 80%;
+  border-radius: 10px;
+  background-color: rgb(240, 240, 240);
+}
+
+.chart {
+  width: 90%;
+  height: 90%;
+  @include centerContainerH;
+  overflow: auto;
+}

@@ -1,0 +1,108 @@
+@import "../../GlobalStyles/global";
+
+.main {
+  height: 7vh;
+  width: 100vw;
+  @include centerContainerH;
+  justify-content: space-between;
+  background-color: black;
+  color: white;
+}
+
+#h1 {
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+  color: $primaryColor;
+}
+
+#label {
+  color: whitesmoke;
+}
+
+#label b {
+  color: $primaryColor;
+}
+
+.logo {
+  height: 100%;
+  @include centerContainerH;
+}
+
+#logo {
+  max-height: 90%;
+  width: auto;
+  object-fit: cover;
+  margin-left: 15px;
+  border-radius: 10px;
+}
+
+.name {
+  color: orange;
+  margin-left: 10px;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.accDiv {
+  @include centerContainerH;
+  margin-right: 15px;
+}
+
+.username {
+  color: whitesmoke;
+  font-weight: 500;
+  margin-right: 10px;
+}
+
+.avatar {
+  border-radius: 50px;
+  background-color: $primaryColor;
+  color: black;
+}
+
+.dropIcon {
+  color: $primaryColor;
+}
+
+.loginDiv {
+  @include centerContainerH;
+}
+
+.login {
+  background: none;
+  color: white;
+  font-size: 18px;
+  border: none;
+  padding: 5px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.menu {
+  position: absolute;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-items: start;
+  align-items: flex-start;
+  border-radius: 5px;
+  background-color: $primaryColor;
+  box-shadow: 0px 3px 10px rgb(0 0 0 /0.2);
+  z-index: 99;
+}
+
+.menuItem {
+  width: calc(100% - 20px);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.menuItem:hover {
+  background-color: rgba(250, 250, 250, 0.5);
+}
