@@ -1,7 +1,7 @@
 use igse;
 
 
--- USERS TBALE
+-- USERS TABLE
 create table users (
 	id int primary key auto_increment,
 	email Varchar(255) not null unique,
@@ -59,3 +59,20 @@ create table readings(
 	paid bit not null default 0,
 	foreign key (userId) references users(id)
 );
+
+
+
+-- PRICES TABLE
+CREATE TABLE prices (
+  id int primary key AUTO_INCREMENT,
+  gas float NOT NULL,
+  electricityDay float NOT NULL,
+  electricityNight float NOT NULL,
+  standingCharge float NOT NULL
+);
+
+INSERT INTO prices
+(gas, electricityDay, electricityNight, standingCharge)
+VALUES(0.2, 0.47, 0.5, 0.74);
+
+
